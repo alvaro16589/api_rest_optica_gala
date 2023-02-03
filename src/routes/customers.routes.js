@@ -1,5 +1,5 @@
 import { Router } from "express";
-import actionCustomer from "../controllers/customers.controller.js";
+import actionCustomerController from "../controllers/customers.controller.js";
 
 
 const router = Router();
@@ -8,6 +8,9 @@ const roat = {
     defID : "/customers/:id"
 }
 
-router.get(roat.def,actionCustomer.getCustomer);
+router.get(roat.def,actionCustomerController.getCustomers);
+router.post(roat.def,actionCustomerController.createCustomer);
+router.patch(roat.defID,actionCustomerController.updateCustomer);
+router.delete(roat.defID,actionCustomerController.deleteCustomer);
 
 export default router
