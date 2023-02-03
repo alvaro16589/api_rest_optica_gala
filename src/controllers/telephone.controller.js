@@ -18,7 +18,7 @@ const actionTelephoneController = {
             const [rows] = await pool.query('INSERT INTO telephone (number, idCustomer) VALUES (?,?)', [number, idCustomer]);
             res.send({ rows });
         } catch (error) {
-            console.log(error)
+            
             return res.status(500).json({
                 message: 'Something wrong on server, function createTelephone'
             })

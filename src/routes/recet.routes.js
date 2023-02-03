@@ -9,5 +9,8 @@ const roat = {
 }
 
 router.get(roat.def,actionRecetController.getRecets);
+router.post(roat.def,actionRecetController.createRecet);
+router.patch(roat.defID,actionRecetController.updateRecet);
+router.delete(roat.defID,actionRecetController.deleteRecet);
 
 export default router
