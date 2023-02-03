@@ -34,7 +34,7 @@ const actionCustomerController = {
             const [result] = await pool.query('UPDATE customer SET name = IFNULL(?,name), lastName = IFNULL(?,lastName) , ci = IFNULL(?,ci), born = IFNULL(?,born), sex = IFNULL(?,sex) WHERE id = ?', [name, lastName, ci, born, sex, id]);
             //console.log(result)
             if (result.affectedRows === 0) return res.status(404).json({
-                message: "Employee not updated"
+                message: "Customer not updated"
             }); res.sendStatus(204);
         } catch (error) {
             return res.status(500).json({
@@ -49,7 +49,7 @@ const actionCustomerController = {
             const [result] = await pool.query('DELETE FROM customer WHERE id = ?', [req.params.id]);
 
             if (result.affectedRows === 0) return res.status(404).json({
-                message: "Employee not found"
+                message: "Customer not found"
             }); res.sendStatus(204);
         } catch (error) {
             return res.status(500).json({
