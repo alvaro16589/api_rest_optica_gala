@@ -7,7 +7,7 @@ import recetRoutes from './routes/recet.routes.js';
 const app = express();
 app.use(express.json())//convert  body to jSon sentence
 const pref = '/api';
-app.use((req, res, next) => {
+app.use((req, res, next) => {//permisos cors para los request de angular
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
