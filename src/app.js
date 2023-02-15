@@ -9,7 +9,7 @@ app.use(express.json())//convert  body to jSon sentence
 const pref = '/api';
 app.use((req, res, next) => {//permisos cors para los request de angular
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, PATCH, DELETE");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     next();
   })
