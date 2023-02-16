@@ -11,6 +11,17 @@ const actionTelephoneController = {
             })
         }
     },
+    //find telephones from one customer
+    getSomeoneTelephones : async (req,res) => {
+        try {
+            const [rows]  = (await pool.query('SELECT * FROM telephone WHERE idCustomer = ?',[req.params.id]));
+            res.send(rows);
+        } catch (error) {
+            return res.status(500).json({
+                message : 'Something wrong on server'
+            })
+        }
+    },
     //METOD STORE
     createTelephone: async (req, res) => {
         try {

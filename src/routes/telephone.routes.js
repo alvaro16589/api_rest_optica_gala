@@ -9,6 +9,7 @@ const roat = {
 }
 
 router.get(roat.def,actionTelephoneController.getTelephones);
+router.get(roat.defId,actionTelephoneController.getSomeoneTelephones);
 router.post(roat.def,actionTelephoneController.createTelephone);
 router.patch(roat.defId,actionTelephoneController.updateTelephone);
 router.delete(roat.defId,actionTelephoneController.deleteTelephone);
