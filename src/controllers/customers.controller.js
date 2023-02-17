@@ -12,6 +12,18 @@ const actionCustomerController = {
             })
         }
     },
+    //SHOW A CUSTOMER
+     
+     getOneCustomer : async (req,res) => {
+        try {
+            const [rows]  = (await pool.query(('SELECT * FROM customer WHERE id = ?'),[req.params.id]));
+            res.send(rows);
+        } catch (error) {
+            return res.status(500).json({
+                message : 'Something wrong on server'
+            })
+        }
+    },
     //METOD STORE
     createCustomer: async (req, res) => {
         try {

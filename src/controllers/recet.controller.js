@@ -11,6 +11,17 @@ const actionRecetController = {
             })
         }
     },
+    //get recet
+    getRecet : async (req,res) => {
+        try {
+            const [rows]  = (await pool.query('SELECT * FROM recet WHERE idCustomer = ?',[req.params.id]));
+            res.send(rows);
+        } catch (error) {
+            return res.status(500).json({
+                message : 'Something wrong on server'
+            })
+        }
+    },
     //METOD STORE
     createRecet: async (req, res) => {
         try {
@@ -29,11 +40,13 @@ const actionRecetController = {
                 addR,
                 segOutL,
                 segOutR,
+                axis2L,
+                axis2R,
                 pdFar,
                 pdNear,
                 idCustomer
             } = req.body;
-            const [rows] = await pool.query('INSERT INTO recet ( sphereL, sphereR, cylinderL, cylinderR, axisL, axisR, prisL, prisR, prisAxisL, prisAxisR, addL, addR, segOutL, segOutR, pdFar, pdNear, idCustomer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
+            const [rows] = await pool.query('INSERT INTO recet ( sphereL, sphereR, cylinderL, cylinderR, axisL, axisR, prisL, prisR, prisAxisL, prisAxisR, addL, addR, segOutL, segOutR, axis2L, axis2R, pdFar, pdNear, idCustomer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
             [
                 sphereL,
                 sphereR,
@@ -49,6 +62,8 @@ const actionRecetController = {
                 addR,
                 segOutL,
                 segOutR,
+                axis2L,
+                axis2R,
                 pdFar,
                 pdNear,
                 idCustomer
@@ -81,11 +96,13 @@ const actionRecetController = {
                 addR,
                 segOutL,
                 segOutR,
+                axis2L,
+                axis2R,
                 pdFar,
                 pdNear,
-                idCustomer 
+                idCustomer
             } = req.body;
-            const [result] = await pool.query('UPDATE recet SET sphereL = IFNULL(?,sphereL), sphereR = IFNULL(?,sphereR) , cylinderL = IFNULL(?,cylinderL), cylinderR = IFNULL(?,cylinderR), axisL = IFNULL(?,axisL), axisR = IFNULL(?,axisR), prisL = IFNULL(?,prisL), prisR = IFNULL(?,prisR) , prisAxisL = IFNULL(?,prisAxisL), prisAxisR = IFNULL(?,prisAxisR), addL = IFNULL(?,addL), addR = IFNULL(?,addR), segOutL = IFNULL(?,segOutL), segOutR = IFNULL(?,segOutR), pdFar = IFNULL(?,pdFar), pdNear = IFNULL(?,pdNear), idCustomer = IFNULL(?,idCustomer) WHERE id = ?', 
+            const [result] = await pool.query('UPDATE recet SET sphereL = IFNULL(?,sphereL), sphereR = IFNULL(?,sphereR) , cylinderL = IFNULL(?,cylinderL), cylinderR = IFNULL(?,cylinderR), axisL = IFNULL(?,axisL), axisR = IFNULL(?,axisR), prisL = IFNULL(?,prisL), prisR = IFNULL(?,prisR) , prisAxisL = IFNULL(?,prisAxisL), prisAxisR = IFNULL(?,prisAxisR), addL = IFNULL(?,addL), addR = IFNULL(?,addR), segOutL = IFNULL(?,segOutL), segOutR = IFNULL(?,segOutR), axis2L = IFNULL(?,axis2L), axis2R = IFNULL(?,axis2R), pdFar = IFNULL(?,pdFar), pdNear = IFNULL(?,pdNear), idCustomer = IFNULL(?,idCustomer) WHERE id = ?', 
             [
                 sphereL,
                 sphereR,
@@ -101,6 +118,8 @@ const actionRecetController = {
                 addR,
                 segOutL,
                 segOutR,
+                axis2L,
+                axis2R,
                 pdFar,
                 pdNear,
                 idCustomer,

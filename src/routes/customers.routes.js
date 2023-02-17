@@ -9,6 +9,7 @@ const roat = {
 }
 
 router.get(roat.def,actionCustomerController.getCustomers);
+router.get(roat.defID,actionCustomerController.getOneCustomer);
 router.post(roat.def,actionCustomerController.createCustomer);
 router.patch(roat.defID,actionCustomerController.updateCustomer);
 router.delete(roat.defID,actionCustomerController.deleteCustomer);
