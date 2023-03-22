@@ -27,9 +27,9 @@ const actionGlassesController = {
     //METOD STORE
     createGlasses : async (req, res) => {
         try {
-            const { code, idShape, idGender, idBrand, idMaterial, idModel, idColor, quantity } = req.body;
-            const [rows] = await pool.query('INSERT INTO glasses ( code, idShape, idGender, idBrand, idMaterial, idModel, idColor, quantity ) VALUES (?,?,?,?,?,?,?,?)', 
-            [ code, idShape, idGender, idBrand, idMaterial, idModel, idColor, quantity ]);
+            const { code, idShape, idGender, idBrand, idMaterial, idModel, idColor, idKind, quantity } = req.body;
+            const [rows] = await pool.query('INSERT INTO glasses ( code, idShape, idGender, idBrand, idMaterial, idModel, idColor, idKind, quantity ) VALUES (?,?,?,?,?,?,?,?,?)', 
+            [ code, idShape, idGender, idBrand, idMaterial, idModel, idColor, idKind, quantity ]);
             res.send({ rows });
         } catch (error) {
             
@@ -43,8 +43,9 @@ const actionGlassesController = {
 
         try {
             const { id } = req.params;
-            const { code, idShape, idGender, idBrand, idMaterial, idModel, idColor, quantity } = req.body;
-            const [result] = await pool.query('UPDATE glasses SET code = IFNULL(?,code), idShape = IFNULL(?,idShape) , idGender = IFNULL(?,idGender), idBrand = IFNULL(?,idBrand), idMaterial = IFNULL(?,idMaterial), idModel = IFNULL(?,idModel), idColor = IFNULL(?,idColor), quantity = IFNULL(?,quantity) WHERE id = ?', [code, idShape, idGender, idBrand, idMaterial, idModel, idColor, quantity, id]);
+            const { code, idShape, idGender, idBrand, idMaterial, idModel, idColor, idKind, quantity } = req.body;
+            const [result] = await pool.query('UPDATE glasses SET code = IFNULL(?,code), idShape = IFNULL(?,idShape) , idGender = IFNULL(?,idGender), idBrand = IFNULL(?,idBrand), idMaterial = IFNULL(?,idMaterial), idModel = IFNULL(?,idModel), idColor = IFNULL(?,idColor), idKind = IFNULL(?,idKind), quantity = IFNULL(?,quantity) WHERE id = ?', 
+            [code, idShape, idGender, idBrand, idMaterial, idModel, idColor, idKind, quantity, id]);
             //console.log(result)
             if (result.affectedRows === 0) return res.status(404).json({
                 message: "Glasses not updated"

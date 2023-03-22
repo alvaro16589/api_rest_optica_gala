@@ -14,6 +14,7 @@ import material2Routes from './routes/material2.routes.js';
 import replacementRoutes from './routes/replacement.routes.js';
 import glassesRoutes from './routes/glasses.routes.js';
 import typologyRoutes from './routes/typology.routes.js';
+import kindRoutes from './routes/kind.routes.js';
 //import routes
 const app = express();
 app.use(express.json())//convert  body to jSon sentence
@@ -40,6 +41,7 @@ app.use(pref, replacementRoutes);
 app.use(pref, shapeRoutes);
 app.use(pref, telephoneRoutes);
 app.use(pref, typologyRoutes);
+app.use(pref, kindRoutes);
 //middlewere
 
 app.unsubscribe((req,res,next)=>{
