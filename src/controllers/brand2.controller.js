@@ -58,7 +58,7 @@ const actionBrand2Controller = {
     deleteBrand2: async (req, res) => {
 
         try {
-            const [result] = await pool.query('DELETE FROM brand WHERE id = ?', [req.params.id]);
+            const [result] = await pool.query('DELETE FROM brand2 WHERE id = ?', [req.params.id]);
 
             if (result.affectedRows === 0) return res.status(404).json({
                 message: "Customer not found"
