@@ -1,76 +1,80 @@
 import { pool } from "../db.js";
 
 const actionRecetController = {
-    getRecets : async (req,res) => {
+    getRecets: async (req, res) => {
         try {
-            const [rows]  = (await pool.query('SELECT * FROM recet'));
+            const [rows] = (await pool.query('SELECT * FROM recet'));
             res.send(rows);
         } catch (error) {
             return res.status(500).json({
-                message : 'Something wrong on server'
+                message: 'Something wrong on server'
             })
         }
     },
     //get recet
-    getRecet : async (req,res) => {
+    getRecet: async (req, res) => {
         try {
-            const [rows]  = (await pool.query('SELECT * FROM recet WHERE idCustomer = ?',[req.params.id]));
+            const [rows] = (await pool.query('SELECT * FROM recet WHERE idCustomer = ?', [req.params.id]));
             res.send(rows);
         } catch (error) {
             return res.status(500).json({
-                message : 'Something wrong on server'
+                message: 'Something wrong on server'
             })
         }
     },
     //METOD STORE
     createRecet: async (req, res) => {
         try {
-            const { 
-                sphereL,
-                sphereR,
-                cylinderL,
-                cylinderR,
-                axisL,
-                axisR,
-                prisL,
-                prisR,
-                prisAxisL,
-                prisAxisR,
-                addL,
-                addR,
-                segOutL,
-                segOutR,
-                axis2L,
-                axis2R,
-                pdFar,
-                pdNear,
+            const {
+                nearSphereL,
+                nearSphereR,
+                nearCylinderL,
+                nearCylinderR,
+                nearAxisL,
+                nearAxisR,
+                nearPrisL,
+                nearPrisR,
+                nearDIP,
+                farSphereL,
+                farSphereR,
+                farCylinderL,
+                farCylinderR,
+                farAxisL,
+                farAxisR,
+                farPrisL,
+                farPrisR,
+                farDIP,
+                add,
+                observation,
                 idCustomer
             } = req.body;
-            const [rows] = await pool.query('INSERT INTO recet ( sphereL, sphereR, cylinderL, cylinderR, axisL, axisR, prisL, prisR, prisAxisL, prisAxisR, addL, addR, segOutL, segOutR, axis2L, axis2R, pdFar, pdNear, idCustomer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
-            [
-                sphereL,
-                sphereR,
-                cylinderL,
-                cylinderR,
-                axisL,
-                axisR,
-                prisL,
-                prisR,
-                prisAxisL,
-                prisAxisR,
-                addL,
-                addR,
-                segOutL,
-                segOutR,
-                axis2L,
-                axis2R,
-                pdFar,
-                pdNear,
-                idCustomer
-            ]);
+            const [rows] = await pool.query('INSERT INTO recet (nearSphereL, nearSphereR, nearCylinderL, nearCylinderR, nearAxisL, nearAxisR, nearPrisL, nearPrisR, nearDIP, farSphereL, farSphereR, farCylinderL, farCylinderR, farAxisL, farAxisR, farPrisL, farPrisR, farDIP, addition, observation, idCustomer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                [
+                    nearSphereL,
+                    nearSphereR,
+                    nearCylinderL,
+                    nearCylinderR,
+                    nearAxisL,
+                    nearAxisR,
+                    nearPrisL,
+                    nearPrisR,
+                    nearDIP,
+                    farSphereL,
+                    farSphereR,
+                    farCylinderL,
+                    farCylinderR,
+                    farAxisL,
+                    farAxisR,
+                    farPrisL,
+                    farPrisR,
+                    farDIP,
+                    add,
+                    observation,
+                    idCustomer
+                ]);
             res.send({ rows });
         } catch (error) {
-            
+            console.log(error)
             return res.status(500).json({
                 message: 'Something wrong on server, function createRecet'
             })
@@ -81,50 +85,54 @@ const actionRecetController = {
 
         try {
             const { id } = req.params;
-            const { 
-                sphereL,
-                sphereR,
-                cylinderL,
-                cylinderR,
-                axisL,
-                axisR,
-                prisL,
-                prisR,
-                prisAxisL,
-                prisAxisR,
-                addL,
-                addR,
-                segOutL,
-                segOutR,
-                axis2L,
-                axis2R,
-                pdFar,
-                pdNear,
+            const {
+                nearSphereL,
+                nearSphereR,
+                nearCylinderL,
+                nearCylinderR,
+                nearAxisL,
+                nearAxisR,
+                nearPrisL,
+                nearPrisR,
+                nearDIP,
+                farSphereL,
+                farSphereR,
+                farCylinderL,
+                farCylinderR,
+                farAxisL,
+                farAxisR,
+                farPrisL,
+                farPrisR,
+                farDIP,
+                addition,
+                observation,
                 idCustomer
             } = req.body;
-            const [result] = await pool.query('UPDATE recet SET sphereL = IFNULL(?,sphereL), sphereR = IFNULL(?,sphereR) , cylinderL = IFNULL(?,cylinderL), cylinderR = IFNULL(?,cylinderR), axisL = IFNULL(?,axisL), axisR = IFNULL(?,axisR), prisL = IFNULL(?,prisL), prisR = IFNULL(?,prisR) , prisAxisL = IFNULL(?,prisAxisL), prisAxisR = IFNULL(?,prisAxisR), addL = IFNULL(?,addL), addR = IFNULL(?,addR), segOutL = IFNULL(?,segOutL), segOutR = IFNULL(?,segOutR), axis2L = IFNULL(?,axis2L), axis2R = IFNULL(?,axis2R), pdFar = IFNULL(?,pdFar), pdNear = IFNULL(?,pdNear), idCustomer = IFNULL(?,idCustomer) WHERE id = ?', 
-            [
-                sphereL,
-                sphereR,
-                cylinderL,
-                cylinderR,
-                axisL,
-                axisR,
-                prisL,
-                prisR,
-                prisAxisL,
-                prisAxisR,
-                addL,
-                addR,
-                segOutL,
-                segOutR,
-                axis2L,
-                axis2R,
-                pdFar,
-                pdNear,
-                idCustomer,
-                id
-            ]);
+            const [result] = await pool.query('UPDATE recet SET nearSphereL = IFNULL(?,nearSphereL), nearSphereR = IFNULL(?,nearSphereR) , nearCylinderL = IFNULL(?,nearCylinderL), nearCylinderR = IFNULL(?,nearCylinderR), nearAxisL = IFNULL(?,nearAxisL), nearAxisR = IFNULL(?,nearAxisR), nearPrisL = IFNULL(?,nearPrisL), nearPrisR = IFNULL(?,nearPrisR) , nearDIP = IFNULL(?,nearDIP), farSphereL = IFNULL(?,farSphereL), farSphereR = IFNULL(?,farSphereR), farCylinderL = IFNULL(?,farCylinderL), farCylinderR = IFNULL(?,farCylinderR), farAxisL = IFNULL(?,farAxisL), farAxisR = IFNULL(?,farAxisR), farPrisL = IFNULL(?,farPrisL), farPrisR = IFNULL(?,farPrisR), farDIP = IFNULL(?,farDIP),  addition = IFNULL(?,addition), observation = IFNULL(?,observation), idCustomer = IFNULL(?,idCustomer) WHERE id = ?',
+                [
+                    nearSphereL,
+                    nearSphereR,
+                    nearCylinderL,
+                    nearCylinderR,
+                    nearAxisL,
+                    nearAxisR,
+                    nearPrisL,
+                    nearPrisR,
+                    nearDIP,
+                    farSphereL,
+                    farSphereR,
+                    farCylinderL,
+                    farCylinderR,
+                    farAxisL,
+                    farAxisR,
+                    farPrisL,
+                    farPrisR,
+                    farDIP,
+                    addition,
+                    observation,
+                    idCustomer,
+                    id
+                ]);
             //console.log(result)
             if (result.affectedRows === 0) return res.status(404).json({
                 message: "Recet not updated"
@@ -149,7 +157,7 @@ const actionRecetController = {
                 message: 'Something wrong on server'
             })
         }
-    }  
+    }
 }
 
 export default actionRecetController
