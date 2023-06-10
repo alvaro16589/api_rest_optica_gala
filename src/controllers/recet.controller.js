@@ -22,10 +22,22 @@ const actionRecetController = {
             })
         }
     },
+    //get recet glasses with price
+    getRecetWithPriceForGlasses: async (req, res) => {
+        try {
+            const [rows] = (await pool.query('SELECT glasses.id AS id, glasses.code AS code, glasses.idShape AS idShape, glasses.idGender AS idGender, glasses.idBrand AS idBrand, glasses.idMaterial AS idMaterial, glasses.idModel AS idModel, glasses.idColor AS idColor, glasses.idKind AS idKind, shape.shape AS shape, gender.gender AS gender, brand.brand AS brand, material.material AS material, model.model AS model, color.color AS color, kind.kind AS kind, recetglasses.price AS price FROM glasses JOIN shape ON shape.id = glasses.idShape JOIN gender ON gender.id = glasses.idGender JOIN brand ON brand.id = glasses.idBrand JOIN material ON material.id = glasses.idMaterial JOIN model ON model.id = glasses.idModel JOIN color ON color.id = glasses.idColor JOIN kind ON kind.id = glasses.idKind JOIN recetglasses ON recetglasses.idGlasses = glasses.id WHERE recetglasses.idRecet = ?', [req.params.id]));
+            res.send(rows);
+        } catch (error) {
+            return res.status(500).json({
+                message: 'Something wrong on server'
+            })
+        }
+    },
     //METOD STORE
     createRecet: async (req, res) => {
         try {
             const {
+                id,
                 nearSphereL,
                 nearSphereR,
                 nearCylinderL,
@@ -44,12 +56,13 @@ const actionRecetController = {
                 farPrisL,
                 farPrisR,
                 farDIP,
-                add,
+                addition,
                 observation,
                 idCustomer
             } = req.body;
-            const [rows] = await pool.query('INSERT INTO recet (nearSphereL, nearSphereR, nearCylinderL, nearCylinderR, nearAxisL, nearAxisR, nearPrisL, nearPrisR, nearDIP, farSphereL, farSphereR, farCylinderL, farCylinderR, farAxisL, farAxisR, farPrisL, farPrisR, farDIP, addition, observation, idCustomer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            const [rows] = await pool.query('INSERT INTO recet (id, nearSphereL, nearSphereR, nearCylinderL, nearCylinderR, nearAxisL, nearAxisR, nearPrisL, nearPrisR, nearDIP, farSphereL, farSphereR, farCylinderL, farCylinderR, farAxisL, farAxisR, farPrisL, farPrisR, farDIP, addition, observation, idCustomer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
                 [
+                    id,
                     nearSphereL,
                     nearSphereR,
                     nearCylinderL,
@@ -68,7 +81,7 @@ const actionRecetController = {
                     farPrisL,
                     farPrisR,
                     farDIP,
-                    add,
+                    addition,
                     observation,
                     idCustomer
                 ]);

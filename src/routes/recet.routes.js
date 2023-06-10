@@ -5,11 +5,13 @@ import actionRecetController from "../controllers/recet.controller.js";
 const router = Router();
 const roat = {
     def : "/recets",
-    defID : "/recets/:id"
+    defID : "/recets/:id",
+    defGlassesPriceID: "/recets/gp/:id"
 }
 
 router.get(roat.def,actionRecetController.getRecets);
 router.get(roat.defID,actionRecetController.getRecet);
+router.get(roat.defGlassesPriceID, actionRecetController.getRecetWithPriceForGlasses);
 router.post(roat.def,actionRecetController.createRecet);
 router.patch(roat.defID,actionRecetController.updateRecet);
 router.delete(roat.defID,actionRecetController.deleteRecet);
