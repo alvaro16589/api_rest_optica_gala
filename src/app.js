@@ -17,6 +17,8 @@ import typologyRoutes from './routes/typology.routes.js';
 import kindRoutes from './routes/kind.routes.js';
 import viewsRoutes from './routes/views.routes.js';
 import recetGlassesRoutes from './routes/recetGlasses.routes.js';
+import historyGlassesRoutes from './routes/historyGlasses.routes.js';
+import historyContactLensesRoutes from './routes/historyContactLenses.routes.js';
 //import routes
 const app = express();
 app.use(express.json())//convert  body to jSon sentence
@@ -45,6 +47,8 @@ app.use(pref, shapeRoutes);
 app.use(pref, telephoneRoutes);
 app.use(pref, typologyRoutes);
 app.use(pref, kindRoutes);
+app.use(pref, historyGlassesRoutes);
+app.use(pref, historyContactLensesRoutes);
 //views
 app.use(pref, viewsRoutes);
 //middlewere
