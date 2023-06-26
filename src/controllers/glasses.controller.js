@@ -27,12 +27,12 @@ const actionGlassesController = {
     //METOD STORE
     createGlasses : async (req, res) => {
         try {
-            const { code, idShape, idGender, idBrand, idMaterial, idModel, idColor, idKind, quantity } = req.body;
-            const [rows] = await pool.query('INSERT INTO glasses ( code, idShape, idGender, idBrand, idMaterial, idModel, idColor, idKind, quantity ) VALUES (?,?,?,?,?,?,?,?,?)', 
-            [ code, idShape, idGender, idBrand, idMaterial, idModel, idColor, idKind, quantity ]);
+            const { id, code, idShape, idGender, idBrand, idMaterial, idModel, idColor, idKind, quantity } = req.body;
+            const [rows] = await pool.query('INSERT INTO glasses ( id, code, idShape, idGender, idBrand, idMaterial, idModel, idColor, idKind, quantity ) VALUES (?,?,?,?,?,?,?,?,?,?)', 
+            [ id, code, idShape, idGender, idBrand, idMaterial, idModel, idColor, idKind, quantity ]);
             res.send({ rows });
         } catch (error) {
-            
+            console.log(error)
             return res.status(500).json({
                 message: 'Something wrong on server, function createGlasses'
             })

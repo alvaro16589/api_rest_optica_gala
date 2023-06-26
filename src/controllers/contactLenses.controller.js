@@ -27,9 +27,9 @@ const actionContactLensesController = {
     //METOD STORE
     createContactLenses : async (req, res) => {
         try {
-            const { code, idMaterial2, idTypology, idReplacement, idBrand2, idColor, quantity } = req.body;
-            const [rows] = await pool.query('INSERT INTO contactlenses ( code, idMaterial2, idTypology, idReplacement, idBrand2, idColor, quantity ) VALUES (?,?,?,?,?,?,?)', 
-            [ code, idMaterial2, idTypology, idReplacement, idBrand2, idColor, quantity ]);
+            const { id, code, idMaterial2, idTypology, idReplacement, idBrand2, idColor, quantity } = req.body;
+            const [rows] = await pool.query('INSERT INTO contactlenses ( id, code, idMaterial2, idTypology, idReplacement, idBrand2, idColor, quantity ) VALUES (?,?,?,?,?,?,?,?)', 
+            [ id, code, idMaterial2, idTypology, idReplacement, idBrand2, idColor, quantity ]);
             res.send({ rows });
         } catch (error) {
             
