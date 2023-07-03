@@ -28,7 +28,8 @@ app.use((req, res, next) => {//permisos cors para los request de angular
     res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, PATCH, DELETE");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     next();
-  })
+})
+
 //connect to routes
 app.use(pref, brandRoutes);
 app.use(pref, brand2Routes);
@@ -53,9 +54,9 @@ app.use(pref, historyContactLensesRoutes);
 app.use(pref, viewsRoutes);
 //middlewere
 
-app.unsubscribe((req,res,next)=>{
+app.unsubscribe((req, res, next) => {
     res.status(400).json({
-        message : 'Route not found'
+        message: 'Route not found'
     })
 })
 

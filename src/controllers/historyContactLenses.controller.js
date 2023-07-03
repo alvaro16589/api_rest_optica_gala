@@ -2,36 +2,37 @@ import { pool } from "../db.js";
 
 const actionHistoryContactLensesController = {
     //metod INDEX
-    getHistoryOfContactLensesQuantity : async (req,res) => {
+    getHistoryOfContactLensesQuantity: async (req, res) => {
         try {
-            const [rows]  = (await pool.query('SELECT * FROM historycontactlenses'));
+            const [rows] = (await pool.query('SELECT * FROM historycontactlenses'));
+            
             res.send(rows);
         } catch (error) {
+            console.log(error)
             return res.status(500).json({
-                message : 'Something wrong on server'
+                message: 'Something wrong on server get historial contact lenses'
             })
         }
     },
-    //SHOW A HistoryOfContactLensesQuantity
-     
-     getOneHistoryOfContactLensesQuantityByidContactLenses : async (req,res) => {
+    //SHOW A HistoryOfContactLensesQuantity     
+    getOneHistoryOfContactLensesQuantityByidContactLenses: async (req, res) => {
         try {
-            const [rows]  = (await pool.query(('SELECT * FROM historycontactlenses WHERE idContactLenses = ?'),[req.params.id]));
-            res.send(rows);
+            const [rows] = (await pool.query(('SELECT * FROM historycontactlenses WHERE idContactLenses = ?'), [req.params.id]));
+            res.send(rows); 
         } catch (error) {
             return res.status(500).json({
-                message : 'Something wrong on server'
+                message: 'Something wrong on server'
             })
         }
     },
     //METOD STORE
     createHistoryOfContactLensesQuantity: async (req, res) => {
         try {
-            const { idContactLenses,quantity } = req.body;
-            const [rows] = await pool.query('INSERT INTO historycontactlenses (idContactLenses, quantity) VALUES (?,?)', [idContactLenses,quantity]);
+            const { idContactLenses, quantity } = req.body;
+            const [rows] = await pool.query('INSERT INTO historycontactlenses (idContactLenses, quantity) VALUES (?,?)', [idContactLenses, quantity]);
             res.send({ rows });
         } catch (error) {
-            
+
             return res.status(500).json({
                 message: 'Something wrong on server, function createHistoryOfContactLensesQuantity'
             })
@@ -68,7 +69,7 @@ const actionHistoryContactLensesController = {
                 message: 'Something wrong on server'
             })
         }
-    } 
+    }
 
 }
 
