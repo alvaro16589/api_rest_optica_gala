@@ -51,6 +51,7 @@ const actionGlassesController = {
                 message: "Glasses not updated"
             }); res.sendStatus(204);
         } catch (error) {
+            console.log(error)
             return res.status(500).json({
                 message: 'Something wrong on server'
             })
