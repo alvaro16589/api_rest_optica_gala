@@ -14,7 +14,7 @@ const actionRecetController = {
     //get recet
     getRecet: async (req, res) => {
         try {
-            const [rows] = (await pool.query('SELECT * FROM recet WHERE idCustomer = ?', [req.params.id]));
+            const [rows] = (await pool.query('SELECT * FROM recet WHERE idCustomer = ? ORDER BY createdAt', [req.params.id]));
             res.send(rows);
         } catch (error) {
             return res.status(500).json({
