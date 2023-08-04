@@ -4,7 +4,7 @@ const actionCustomerController = {
     //metod INDEX
     getCustomers : async (req,res) => {
         try {
-            const [rows]  = (await pool.query('SELECT * FROM customer'));
+            const [rows]  = (await pool.query('SELECT * FROM customer ORDER BY id DESC'));
             res.send(rows);
         } catch (error) {
             return res.status(500).json({
